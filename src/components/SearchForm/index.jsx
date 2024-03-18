@@ -5,10 +5,14 @@ import { TimeDropDown } from "../TimeDropdown/TimeDropdown"
 import React, { useState, useEffect } from 'react';
 
 
-export const SearchForm = () => {
+export const SearchForm = (props) => {
     const [searchBarValue, setSearchBarValue] = useState(""); 
     const [timeValue, setTimeValue] = useState(""); 
-    const [difficulityValue, setDifficultyValue] = useState(""); 
+    const [difficultyValue, setDifficultyValue] = useState(""); 
+
+    // useEffect(() => {
+    //    props.onChange([searchBarValue, timeValue, difficultyValue])
+    // }, [searchBarValue, timeValue, difficultyValue]);
 
     const handleOnChange = (e) => {
         setSearchBarValue(e.target.value);        
@@ -20,8 +24,17 @@ export const SearchForm = () => {
     };
 
     const handleOnChangeDiff = (e) => {
-        setDifficultyValue(e.target.value);   
-        console.log(e.target.value)           
+        setDifficultyValue(e.target.value);              
+    };
+
+    const handleOnClick = () => {
+        if (timeValue.length === 0) {
+            setTimeValue("All");
+        }   
+        if (difficultyValue.length === 0) {
+            setTimeValue("Any");
+        }  
+        props.onChange([searchBarValue, timeValue, difficultyValue])
     };
 
     return (
@@ -30,7 +43,7 @@ export const SearchForm = () => {
                 <SearchBar onChange={handleOnChange}/>
                 <TimeDropDown  onChange={handleOnChangeTime}/>
                 <DifficultyDropDown  onChange={handleOnChangeDiff}/>
-                <SearchButton />
+                <SearchButton onClick={handleOnClick}/>
             </form>
         </div>
     )

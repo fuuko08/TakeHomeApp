@@ -5,22 +5,24 @@ import { fetchData } from '../../services/recipeServices.js';
 
 export const RecipeGrid = () => {
   const [recipes, setRecipes] = useState([]);
+  const [resultRecipes, setResultRecipes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const recipesToDisplay = recipes.slice(1);
+  const recipesToDisplay = resultRecipes.slice(1);
 
   useEffect(() => {
     async function fetchRecipes() {
       try {
         const data = await fetchData();
         setRecipes(data.recipes);
+        setResultRecipes(data.recipes);
         setLoading(false);
       } catch (error) {
         setError(error);
         setLoading(false);
       }
     }
-    fetchRecipes();
+   fetchRecipes();
   }, []);
 
   if (loading) {
@@ -37,11 +39,11 @@ export const RecipeGrid = () => {
     <>
       <div className="cardGrid flex flex-wrap my-5 max-w-screen-xl mx-auto px-5">
         <LargeCard 
-          image={recipes[0].image}
-          name={recipes[0].name}
-          instruction={recipes[0].instructions}
-          prepTimeMinutes={recipes[0].prepTimeMinutes}
-          cookTimeMinutes={recipes[0].cookTimeMinutes}
+          image={resultRecipes[0].image}
+          name={resultRecipes[0].name}
+          instruction={resultRecipes[0].instructions}
+          prepTimeMinutes={resultRecipes[0].prepTimeMinutes}
+          cookTimeMinutes={resultRecipes[0].cookTimeMinutes}
         />
         {recipesToDisplay.map((recipe, index) => (
           <SmallCard 
