@@ -1,10 +1,16 @@
 import { DifficultyFilter } from '../../services/difficultyFilter.js';
 import React, { useState, useEffect } from 'react';
 
-export const DifficultyDropDown = () => {
+export const DifficultyDropDown = (props) => {
     const [difficulties, setDifficulties] = useState([]);
+    const [selectedDiff, setSelectedDiff] = useState("");
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+
+    const handleDiffChange = (e) => {
+      props.onChange(e);
+      setSelectedDiff(e);
+  };
 
     useEffect(() => {
         async function fetchDifficulty() {
@@ -30,7 +36,7 @@ export const DifficultyDropDown = () => {
 
     return (
         
-        <select id="difficulty" className="mr-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+        <select onChange={handleDiffChange} id="difficulty" className="mr-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
             {difficulties.map((difficulty, index) => (
                 <option key={index} value={difficulty}>{difficulty}</option>
             ))}
