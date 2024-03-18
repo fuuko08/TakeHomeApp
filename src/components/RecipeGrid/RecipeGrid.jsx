@@ -1,39 +1,11 @@
 import { LargeCard } from "../RecipeCards/LargeCard"
 import { SmallCard } from "../RecipeCards/SmallCard"
-import React, { useState, useEffect } from 'react';
-import { fetchData } from '../../services/recipeServices.js';
+import React, { useState } from 'react';
 
-export const RecipeGrid = () => {
-  const [recipes, setRecipes] = useState([]);
-  const [resultRecipes, setResultRecipes] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+export const RecipeGrid = (props) => {
+  const [resultRecipes, setResultRecipes] = useState(props.data);
   const recipesToDisplay = resultRecipes.slice(1);
 
-  useEffect(() => {
-    async function fetchRecipes() {
-      try {
-        const data = await fetchData();
-        setRecipes(data.recipes);
-        setResultRecipes(data.recipes);
-        setLoading(false);
-      } catch (error) {
-        setError(error);
-        setLoading(false);
-      }
-    }
-   fetchRecipes();
-  }, []);
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div>Error: {error.message}</div>;
-  }
-
-  
    
     return (
     <>
