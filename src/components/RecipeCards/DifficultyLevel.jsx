@@ -1,5 +1,5 @@
-export const DifficultyLevel = () => {
+export const DifficultyLevel = (props) => {
     return (
-        <p className="text-zinc-500">Difficulty Level</p>
+        <p className="text-zinc-500">{props.instruction}</p>
     )
 }

@@ -4,15 +4,15 @@ import { PrepTime } from "./PrepTime"
 import { RecipeName } from "./RecipeName"
 import { DifficultyLevel } from "./DifficultyLevel"
 
-export const LargeCard = () => {
+export const LargeCard = (props) => {
     return (
         <div className="grid w-2/3 h-full mb-3">
-            <LargeImage />
-            <RecipeName />
-            <DifficultyLevel />
+            <LargeImage src={props.image}/>
+            <RecipeName name={props.name}/>
+            <DifficultyLevel instruction={props.instruction}/>
             <div>
-                <PrepTime />
-                <CookTime />
+                <PrepTime prepTimeMinutes={props.prepTimeMinutes}/>
+                <CookTime cookTimeMinutes={props.cookTimeMinutes}/>
             </div>
         </div>
     )

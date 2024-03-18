@@ -1,7 +1,7 @@
 import missingImageLg from "../../assets/missingimglg.png";
 
-export const LargeImage = () => {
+export const LargeImage = (props) => {
     return (
-        <img src={missingImageLg} className="h-80 w-full" alt=""/>
+        <img src={props.src} className="h-80 w-full" alt=""/>
     )
 }
