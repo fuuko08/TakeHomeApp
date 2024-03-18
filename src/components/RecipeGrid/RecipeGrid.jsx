@@ -45,6 +45,7 @@ export const RecipeGrid = () => {
         />
         {recipesToDisplay.map((recipe, index) => (
           <SmallCard 
+            key={index}
             image={recipe.image}
             name={recipe.name}
             instruction={recipe.instructions}
